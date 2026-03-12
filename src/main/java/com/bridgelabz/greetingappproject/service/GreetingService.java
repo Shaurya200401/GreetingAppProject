@@ -1,24 +1,50 @@
 package com.bridgelabz.greetingappproject.service;
 
+import com.bridgelabz.greetingappproject.entity.Greeting;
+import com.bridgelabz.greetingappproject.repository.GreetingRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class GreetingService {
 
-    public String getGreeting() {
-        return "Hello World";
+    private final GreetingRepository repository;
+
+    public GreetingService(GreetingRepository repository) {
+        this.repository = repository;
     }
-    public String getGreetingMessage(String firstName, String lastName) {
 
-        if(firstName != null && lastName != null)
-            return "Hello " + firstName + " " + lastName;
+    public Greeting saveGreeting(String message) {
 
-        if(firstName != null)
-            return "Hello " + firstName;
+        Greeting greeting = new Greeting();
+        greeting.setMessage(message);
 
-        if(lastName != null)
-            return "Hello " + lastName;
-
-        return "Hello World";
+        return repository.save(greeting);
     }
+
+    public Greeting getGreetingById(Long id) {
+        return repository.findById(id).orElse(null);
+    }
+
+    public List<Greeting> getAllGreetings() {
+        return repository.findAll();
+    }
+
+    public Greeting updateGreeting(Long id, String message) {
+
+        Greeting greeting = repository.findById(id).orElse(null);
+
+        if(greeting != null){
+            greeting.setMessage(message);
+            return repository.save(greeting);
+        }
+
+        return null;
+    }
+
+    public void deleteGreeting(Long id){
+        repository.deleteById(id);
+    }
+
 }

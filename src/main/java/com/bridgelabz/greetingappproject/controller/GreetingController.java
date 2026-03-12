@@ -1,28 +1,30 @@
 package com.bridgelabz.greetingappproject.controller;
-import com.bridgelabz.greetingappproject.dto.UserDTO;
+
+import com.bridgelabz.greetingappproject.entity.Greeting;
 import com.bridgelabz.greetingappproject.service.GreetingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
 
-    @Autowired
-    GreetingService greetingService;
+    private final GreetingService service;
 
-    @GetMapping
-    public String greeting() {
-        return greetingService.getGreeting();
+    public GreetingController(GreetingService service) {
+        this.service = service;
     }
 
-    @PostMapping
-    public String greeting(@RequestBody UserDTO user) {
+    // UC4 — Save Greeting
+    @PostMapping("/save")
+    public Greeting saveGreeting(@RequestParam String message){
 
-        return greetingService.getGreetingMessage(
-                user.getFirstName(),
-                user.getLastName()
-        );
+        return service.saveGreeting(message);
     }
+    @GetMapping("/{id}")
+    public Greeting getGreeting(@PathVariable Long id){
 
+        return service.getGreetingById(id);
+    }
 }
