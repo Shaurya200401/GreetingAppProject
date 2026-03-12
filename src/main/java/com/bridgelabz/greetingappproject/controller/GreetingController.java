@@ -1,28 +1,19 @@
 package com.bridgelabz.greetingappproject.controller;
 
+import com.bridgelabz.greetingappproject.service.GreetingService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
 
+    @Autowired
+    GreetingService greetingService;
+
     @GetMapping
-    public String getGreeting() {
-        return "Hello from BridgeLabz";
+    public String greeting() {
+        return greetingService.getGreeting();
     }
 
-    @PostMapping
-    public String postGreeting() {
-        return "POST request received";
-    }
-
-    @PutMapping
-    public String putGreeting() {
-        return "PUT request received";
-    }
-
-    @DeleteMapping
-    public String deleteGreeting() {
-        return "DELETE request received";
-    }
 }
