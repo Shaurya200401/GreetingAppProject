@@ -27,7 +27,7 @@ public class GreetingService {
         return repository.findById(id).orElse(null);
     }
 
-
+    //UC7
     public Greeting updateGreeting(Long id, String message) {
 
         Greeting greeting = repository.findById(id).orElse(null);
@@ -39,7 +39,7 @@ public class GreetingService {
 
         return null;
     }
-
+    //UC8
     public void deleteGreeting(Long id){
         repository.deleteById(id);
     }
