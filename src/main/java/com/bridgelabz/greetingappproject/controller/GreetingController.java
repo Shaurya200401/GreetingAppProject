@@ -23,8 +23,8 @@ public class GreetingController {
         return service.saveGreeting(message);
     }
     @GetMapping("/{id}")
-    public Greeting getGreeting(@PathVariable Long id){
-
+    public Greeting getGreetingById(@PathVariable Long id) {
         return service.getGreetingById(id);
     }
+
 }
