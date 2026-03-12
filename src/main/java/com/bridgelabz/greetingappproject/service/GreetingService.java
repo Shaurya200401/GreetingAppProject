@@ -27,9 +27,6 @@ public class GreetingService {
         return repository.findById(id).orElse(null);
     }
 
-    public List<Greeting> getAllGreetings() {
-        return repository.findAll();
-    }
 
     public Greeting updateGreeting(Long id, String message) {
 
@@ -45,6 +42,9 @@ public class GreetingService {
 
     public void deleteGreeting(Long id){
         repository.deleteById(id);
+    }
+    public List<Greeting> getAllGreetings() {
+        return repository.findAll();
     }
 
 }
